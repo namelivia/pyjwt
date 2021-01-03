@@ -199,7 +199,7 @@ class HMACAlgorithm(Algorithm):
 
     @staticmethod
     def from_jwk(jwk):
-        obj = json.loads(jwk)
+        obj = jwk if isinstance(jwk, dict) else json.loads(jwk)
 
         if obj.get("kty") != "oct":
             raise InvalidKeyError("Not an HMAC key")
